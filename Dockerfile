@@ -44,5 +44,3 @@ COPY ./app/ /app
 ENV TITLE="Play with Seam"
 ENV FM_HOME="/app"
 
-# Default to python
-CMD ["python"]
