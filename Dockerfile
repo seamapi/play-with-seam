@@ -4,43 +4,40 @@ FROM linuxserver/vscodium
 # Set working directory
 # WORKDIR /app
 
-# Install curl
-# USER root
+USER root
 RUN apt-get update && \
   apt-get install -y curl wget
 
 # Install Python
-# RUN apt-get install -y python3 python3-pip
+RUN apt-get install -y python3 python3-pip python-is-python3
 
 # Install Ruby
 RUN apt-get install -y ruby ruby-dev
 
-# Install Node.js
-RUN touch /root/.bashrc
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-RUN . /config/.nvm/nvm.sh && \
-  nvm install 20 && \
-  nvm alias default 20 && \
-  nvm use default
-ENV PATH $NVM_DIR/v20/bin:$PATH
-
 # Install dotnet
 RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
 RUN chmod +x dotnet-install.sh
-RUN ./dotnet-install.sh --version latest
+RUN ./dotnet-install.sh --channel 7.0
 
 COPY ./app/ /app
-
-# Install Seam
-# RUN pip3 install seamapi
-# RUN gem install seamapi
-# RUN cd /app/javascript && npm init -y && npm add seamapi
 
 # Set up entrypoint
 # COPY entrypoint.sh /usr/local/bin/
 # RUN chmod +x /usr/local/bin/entrypoint.sh
 # ENTRYPOINT ["entrypoint.sh"]
+COPY /root /
+
+RUN pip3 install seamapi
+RUN cd /app/ruby && gem install seamapi
+RUN cd /app/javascript && npm init -y && npm add seamapi
+# RUN dotnet add package seam
+
+RUN chown -R abc /config
 
 ENV TITLE="Play with Seam"
 ENV FM_HOME="/app"
+
+# /config/.dotnet/dotnet
+# dotnet new console
+# dotnet run
 
