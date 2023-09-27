@@ -1,0 +1,21 @@
+{
+  "name": "play-with-seam",
+  "version": "1.0.0",
+  "description": "Play with Seam code snippets inside of vs code from the comfort of Docker.",
+  "main": "index.js",
+  "scripts": {
+    "build": "docker build -t seamapi/play-with-seam .",
+    "push": "docker push seamapi/play-with-seam"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seamapi/play-with-seam.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seamapi/play-with-seam/issues"
+  },
+  "homepage": "https://github.com/seamapi/play-with-seam#readme"
+}
