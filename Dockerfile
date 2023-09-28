@@ -6,6 +6,7 @@ RUN chown -R abc /config
 USER abc
 RUN codium --install-extension ms-python.python
 RUN codium --install-extension rebornix.ruby
+RUN codium --install-extension esbenp.prettier-vscode
 
 USER root
 RUN apt-get update && \
