@@ -1,0 +1,20 @@
+{
+    "name": "Play with Seam Dev Container",
+    "dockerFile": "Dockerfile",
+    "forwardPorts": [],
+    "postCreateCommand": "echo 'Devcontainer setup complete!'",
+    "extensions": [
+      "ms-python.python",
+      "rebornix.ruby",
+      "esbenp.prettier-vscode",
+      "ms-dotnettools.csharp"
+    ],
+    "settings": {
+      "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "remoteUser": "abc",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/app,type=bind,consistency=cached",
+    "workspaceFolder": "/app",
+    "runArgs": []
+  }
+  
