@@ -17,9 +17,8 @@ RUN apt-get -y install \
     python3 \
     python3-pip
 
-# Install Node.js
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs
+# Install NodeJS
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 
 # Install Ruby
 RUN apt-get -y install \
