@@ -17,27 +17,34 @@ RUN apt-get -y install \
     python3 \
     python3-pip
 
-# Install NodeJS
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+# Install nvm with node and npm
+RUN mkdir -p /usr/local/share/nvm
+ENV NVM_DIR=/usr/local/share/nvm
+ENV NODE_VERSION=20
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash \
+    && . $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
 
-# Install Ruby
+# # Install Ruby
 RUN apt-get -y install \
     ruby \
     ruby-dev
 
-# Install .NET SDK for C#
+# # Install .NET SDK for C#
 RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
     && dpkg -i packages-microsoft-prod.deb \
     && apt-get update \
     && apt-get -y install dotnet-sdk-7.0
 
-# Clean up
+# # Clean up
 RUN apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
-# Switch back to dialog for any ad-hoc use of apt-get
+# # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
 
-# Set the default shell to bash rather than sh
+# # Set the default shell to bash rather than sh
 ENV SHELL /bin/bash
